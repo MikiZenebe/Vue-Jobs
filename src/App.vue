@@ -1,7 +1,7 @@
-<script setup>
-
+<script script>
+import Navbar from "./components/Navbar.vue";
 </script>
 
 <template>
-  <div>Hello from Vue-Jobs</div>
+  <Navbar />
 </template>
