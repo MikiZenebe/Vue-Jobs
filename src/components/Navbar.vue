@@ -7,7 +7,9 @@ import logo from "@/assets/logo.png";
     <div class="flex items-center justify-between mx-10 md:mx-20">
       <div class="flex items-center gap-3">
         <img class="h-10 w-auto" :src="logo" alt="Vue Jobs" />
-        <p class="text-xl font-bold">Vue Jobs</p>
+        <span class="hidden md:block text-white text-2xl font-bold ml-2"
+          >Vue Jobs</span
+        >
       </div>
 
       <div class="flex items-center gap-5">

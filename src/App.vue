@@ -1,11 +1,11 @@
 <script script>
 import Navbar from "./components/Navbar.vue";
-import HomeView from "./views/HomeView.vue";
+import { RouterView } from "vue-router";
 
 export default {
   components: {
     Navbar,
-    HomeView,
+    RouterView,
   },
 };
 </script>
@@ -13,6 +13,6 @@ export default {
 <template>
   <div class="mx-auto">
     <Navbar />
-    <HomeView />
+    <RouterView />
   </div>
 </template>
