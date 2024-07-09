@@ -3,6 +3,7 @@ import PulseLoader from "vue-spinner/src/PulseLoader.vue";
 import JobListing from "@/components/JobListing.vue";
 import jobsData from "@/jobs.json";
 import { reactive, ref } from "vue"; //Reactive Similar to usestate
+import { RouterLink } from "vue-router";
 
 const state = reactive({
   jobs: [],
@@ -42,9 +43,10 @@ const jobs = ref(jobsData);
   </section>
 
   <section v-if="showButton" class="m-auto max-w-lg my-10 px-6">
-    <span
+    <RouterLink
+      to="/jobs"
       class="block bg-black text-white text-center py-4 px-6 rounded-xl hover:bg-gray-700"
-      >View All Jobs</span
+      >View All Jobs</RouterLink
     >
   </section>
 </template>

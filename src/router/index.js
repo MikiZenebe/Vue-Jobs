@@ -12,9 +12,29 @@ const router = createRouter({
     },
     {
       path: "/jobs",
-      name: "jobsView",
+      name: "jobs",
       component: JobsView,
     },
+    // {
+    //   path: "/jobs/:id",
+    //   name: "job",
+    //   component: JobView,
+    // },
+    // {
+    //   path: "/jobs/add",
+    //   name: "add-job",
+    //   component: AddJobView,
+    // },
+    // {
+    //   path: "/jobs/edit/:id",
+    //   name: "edit-job",
+    //   component: EditJobView,
+    // },
+    // {
+    //   path: "/:catchAll(.*)",
+    //   name: "not-found",
+    //   component: NotFoundView,
+    // },
   ],
 });
 
