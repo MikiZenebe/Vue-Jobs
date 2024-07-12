@@ -1,9 +1,51 @@
 <script setup>
+import axios from "axios";
 import { reactive } from "vue";
+import { useRouter } from "vue-router";
+import { useToast } from "vue-toastification";
+
+const router = useRouter();
+const toast = useToast();
 
 const form = reactive({
   type: "Full-Time",
+  title: "",
+  description: "",
+  salary: "",
+  location: "",
+  company: {
+    name: "",
+    description: "",
+    contactEmail: "",
+    contactPhone: "",
+  },
 });
+
+const handleSubmit = async () => {
+  const newJob = {
+    title: form.title,
+    type: form.type,
+    location: form.location,
+    description: form.description,
+    salary: form.salary,
+    company: {
+      name: form.company.name,
+      description: form.company.description,
+      contactEmail: form.company.contactEmail,
+      contactPhone: form.company.contactPhone,
+    },
+  };
+
+  try {
+    const res = await axios.post(`/api/jobs`, newJob);
+
+    //Show Toast
+    toast.success("Job Added");
+    router.push(`/jobs/${res.data.id}`);
+  } catch (error) {
+    console.log("Error posting job", error);
+  }
+};
 </script>
 
 <template>
@@ -12,7 +54,7 @@ const form = reactive({
       <div
         class="bg-[#2e2e2e] px-6 py-8 mb-4 shadow-md rounded-md border border-green-500 m-4 md:m-0"
       >
-        <form>
+        <form @submit.prevent="handleSubmit">
           <h2 class="text-3xl text-center font-semibold mb-6 text-green-400">
             Add Job
           </h2>
@@ -22,6 +64,7 @@ const form = reactive({
               >Job Type</label
             >
             <select
+              v-model="form.type"
               id="type"
               name="type"
               class="border rounded w-full py-2 px-3"
@@ -40,6 +83,7 @@ const form = reactive({
             >
             <input
               type="text"
+              v-model="form.title"
               id="name"
               name="name"
               class="border rounded w-full py-2 px-3 mb-2"
@@ -54,6 +98,7 @@ const form = reactive({
             <textarea
               id="description"
               name="description"
+              v-model="form.description"
               class="border rounded w-full py-2 px-3"
               rows="4"
               placeholder="Add any job duties, expectations, requirements, etc"
@@ -67,6 +112,7 @@ const form = reactive({
             <select
               id="salary"
               name="salary"
+              v-model="form.salary"
               class="border rounded w-full py-2 px-3"
               required
             >
@@ -90,6 +136,7 @@ const form = reactive({
               type="text"
               id="location"
               name="location"
+              v-model="form.location"
               class="border rounded w-full py-2 px-3 mb-2"
               placeholder="Company Location"
               required
@@ -106,6 +153,7 @@ const form = reactive({
               type="text"
               id="company"
               name="company"
+              v-model="form.company.name"
               class="border rounded w-full py-2 px-3"
               placeholder="Company Name"
             />
@@ -120,6 +168,7 @@ const form = reactive({
             <textarea
               id="company_description"
               name="company_description"
+              v-model="form.company.description"
               class="border rounded w-full py-2 px-3"
               rows="4"
               placeholder="What does your company do?"
@@ -136,6 +185,7 @@ const form = reactive({
               type="email"
               id="contact_email"
               name="contact_email"
+              v-model="form.company.contactEmail"
               class="border rounded w-full py-2 px-3"
               placeholder="Email address for applicants"
               required
@@ -151,6 +201,7 @@ const form = reactive({
               type="tel"
               id="contact_phone"
               name="contact_phone"
+              v-model="form.company.contactPhone"
               class="border rounded w-full py-2 px-3"
               placeholder="Optional phone for applicants"
             />
