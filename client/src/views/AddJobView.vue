@@ -35,12 +35,9 @@ const handleSubmit = async () => {
   };
 
   try {
-    const res = await axios.post(
-      `http://localhost:5000/api/job/newJob`,
-      newJob
-    );
+    const res = await axios.post(`/api/jobs`, newJob);
 
-    router.push(`/`);
+    router.push(`/jobs/${res.data.id}`);
   } catch (error) {
     console.log("Error posting job", error);
   }
